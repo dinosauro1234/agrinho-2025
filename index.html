@@ -1,1 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festejando Conexão Campo Cidade</title>
+    <style>
+        :root {
+            --verde-principal: #2E8B57;
+            --verde-escuro: #1C5C3A;
+            --verde-claro: #7FBA8F;
+            --preto: #000000;
+            --cinza-escuro: #1A1A1A;
+            --branco: #FFFFFF;
+            --cinza-claro: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--cinza-claro);
+            color: var(--preto);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--preto);
+            color: var(--branco);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--verde-principal);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: var(--branco);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--verde-principal);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%232E8B57"/><path d="M0,0 L100,100" stroke="%231C5C3A" stroke-width="2"/><path d="M100,0 L0,100" stroke="%231C5C3A" stroke-width="2"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--branco);
+            padding-top: 80px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--verde-principal);
+            color: var(--branco);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--verde-escuro);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--verde-escuro);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--verde-principal);
+            margin: 0.5rem auto;
+        }
+        
+        .about {
+            background-color: var(--branco);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-color: var(--verde-claro);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .events {
+            background-color: var(--cinza-claro);
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .event-card {
+            background-color: var(--branco);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .event-image {
+            height: 200px;
+            background-color: var(--verde-claro);
+        }
+        
+        .event-content {
+            padding: 1.5rem;
+        }
+        
+        .event-content h3 {
+            color: var(--verde-escuro);
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-content p {
+            margin-bottom: 1rem;
+            color: var(--cinza-escuro);
+        }
+        
+        .gallery {
+            background-color: var(--branco);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            height: 250px;
+            background-color: var(--verde-claro);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .contact {
+            background-color: var(--cinza-claro);
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--branco);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--verde-escuro);
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        footer {
+            background-color: var(--preto);
+            color: var(--branco);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--branco);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--verde-principal);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Festejando Conexão</div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#eventos">Eventos</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
+    <section id="inicio" class="hero">
+        <div class="container hero-content">
+            <div>
+                <h1>Festejando Conexão Campo Cidade</h1>
+                <p>Celebrando a integração entre a tradição rural e a inovação urbana em um evento único</p>
+                <a href="#eventos" class="btn">Participe</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre o Evento</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>O "Festejando Conexão Campo Cidade" é uma iniciativa que busca fortalecer os laços entre a produção rural e o consumo urbano, promovendo trocas de experiências, saberes e sabores.</p>
+                    <p>Neste evento, celebramos a riqueza da agricultura familiar, a sustentabilidade dos processos produtivos e a importância de uma alimentação saudável e consciente.</p>
+                    <p>Venha viver essa experiência única onde campo e cidade se encontram para festejar a conexão que alimenta e transforma.</p>
+                </div>
+                <div class="about-image">
+                    <!-- Imagem ilustrativa da conexão campo-cidade -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="eventos" class="events">
+        <div class="container">
+            <h2 class="section-title">Nossos Eventos</h2>
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-image"></div>
+                    <div class="event-content">
+                        <h3>Feira de Produtos Locais</h3>
+                        <p>Domingo, 25 de Novembro - 9h às 16h</p>
+                        <p>Produtos frescos diretamente do produtor rural para sua mesa.</p>
+                        <a href="#" class="btn">Saiba mais</a>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image"></div>
+                    <div class="event-content">
+                        <h3>Workshop de Agricultura Urbana</h3>
+                        <p>Sábado, 1 de Dezembro - 14h às 17h</p>
+                        <p>Aprenda a cultivar alimentos em pequenos espaços urbanos.</p>
+                        <a href="#" class="btn">Saiba mais</a>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image"></div>
+                    <div class="event-content">
+                        <h3>Roda de Conversa: Alimentação Consciente</h3>
+                        <p>Domingo, 2 de Dezembro - 10h às 12h</p>
+                        <p>Diálogo sobre consumo responsável e sustentabilidade.</p>
+                        <a href="#" class="btn">Saiba mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Galeria</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="contact">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2023 Festejando Conexão Campo Cidade. Todos os direitos reservados.</p>
+                <div class="social-links">
+                    <a href="#">📱</a>
+                    <a href="#">📷</a>
+                    <a href="#">🔗</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
